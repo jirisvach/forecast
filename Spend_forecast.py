@@ -141,6 +141,7 @@ for i in df.index:
         df.loc[i, "Spend"] = final_pred
 
 # Export do Excelu
-df.to_excel("spend_forecast_with_custom_index_dynamic.xlsx", index=False)
+df.to_excel("spend_forecast_index.xlsx", index=False)
 
-print("Forecast saved to spend_forecast_with_custom_index_dynamic.xlsx")
+print("Done spend_forecast_index.xlsx.xlsx")
+
