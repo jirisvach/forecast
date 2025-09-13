@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, r2_score # pouze pro testy na scoring
 from datetime import timedelta
 
 # Load
@@ -33,6 +34,16 @@ y = df["Spend"]
 # Train model
 model = RandomForestRegressor(n_estimators=300, random_state=42)
 model.fit(X, y)
+
+# Scoring, pouze pro test 
+y_pred_train = model.predict(X)
+mae = mean_absolute_error(y, y_pred_train)
+r2 = r2_score(y, y_pred_train)
+
+print(f"Training Accuracy:")
+print(f"  MAE  = {mae:,.0f}") #(Mean Absolute Error) → average absolute difference between actual and predicted.
+print(f"  R2   = {r2:.4f}") # explains how much variance in Spend is explained by the model (1 = perfect, 0 = no better than average
+
 
 # Forecast na 15 dni
 future_preds = []
@@ -144,4 +155,5 @@ for i in df.index:
 df.to_excel("spend_forecast_index.xlsx", index=False)
 
 print("Done spend_forecast_index.xlsx.xlsx")
+
 
